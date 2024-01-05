@@ -1,0 +1,7 @@
+<div class='mx-auto max-w-fit'>
+  <% if user_signed_in? %>
+    <h1><%= link_to 'Start Chatting!', rooms_path %><h1>
+  <% else %>
+    <h1>Please Log In to your accont to start chatting</h1>
+  <% end %>
+</div>

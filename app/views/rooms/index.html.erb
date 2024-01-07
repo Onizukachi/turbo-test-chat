@@ -1,10 +1,10 @@
-<div class='flex h-svh'>
+<div class="flex h-full">
   <div class='grow-1 pt-10 shrink-0 flex flex-col px-4 bg-blue-100'>
     <h2 class="mb-2 text-lg font-semibold text-gray-900 dark:text-white">Users</h2>
     <ul class="max-h-32 overflow-y-auto space-y-1  text-gray-500 list-inside dark:text-gray-400">
       <% @users.each do |user| %>
         <li>
-          <%= link_to user.email, '#', class: 'font-medium text-blue-600 dark:text-blue-500 hover:underline'%>
+          <%= link_to user.email, user_chat_path(user), class: 'font-medium text-blue-600 dark:text-blue-500 hover:underline'%>
         </li>
       <% end %>
     </ul>
@@ -27,8 +27,10 @@
 
   <div class='grow pt-10'>
     <% if @single_room.present? %>
-      <%= render 'room', room: @single_room %>
+      <%= render 'rooms/room', room: @single_room %>
     <% end %>
   </div>
 </div>
+
+
 

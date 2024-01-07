@@ -1,10 +1,9 @@
 class RoomsController < ApplicationController
   before_action :authenticate_user!
+  include ChatEnv
 
   def index
-    @users = User.all_except current_user
-    @rooms = Room.public_rooms
-    @new_room = Room.new
+    prepare_chat_env
   end
 
   def create
@@ -20,12 +19,7 @@ class RoomsController < ApplicationController
   end
 
   def show
-    @users = User.all_except current_user
-    @rooms = Room.public_rooms
-    @new_room = Room.new
     @single_room = Room.find params[:id]
-    @message = Message.new
-
-    render :index
+    prepare_chat_env
   end
 end

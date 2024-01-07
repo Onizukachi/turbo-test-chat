@@ -12,4 +12,6 @@ Rails.application.routes.draw do
     resources :messages
   end
 
+  get "user/:id/chat" => "users#chat", as: :user_chat
+
 end

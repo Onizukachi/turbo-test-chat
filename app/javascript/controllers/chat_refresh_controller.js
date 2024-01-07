@@ -2,18 +2,17 @@ import consumer from "../channels/consumer"
 import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
+  static  values = { room: String }
+
   connect() {
-    this.subscribe()
+    this.subscribe();
     this.scrollMessages()
   }
 
   subscribe() {
-    const turboCableStreamTag = document.querySelector('turbo-cable-stream-source')
-    const signedStreamName = turboCableStreamTag.channel.signed_stream_name
-    const channelName = turboCableStreamTag.channel.channel
     const scrollMessages = this.scrollMessages.bind(this)
 
-    this.subscription = consumer.subscriptions.create({ channel: channelName, signed_stream_name: signedStreamName }, {
+    this.subscription = consumer.subscriptions.create({ channel: 'ChatChannel', room: this.roomValue }, {
       received(data) {
         setTimeout(scrollMessages, 100);
       }

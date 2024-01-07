@@ -5,7 +5,7 @@ class MessagesController < ApplicationController
 
   def create
     room = Room.find params[:room_id]
-    @new_message = current_user.messages.build(body: messsage_params[:body], room:)
+    @new_message = current_user.messages.build(body: message_params[:body], room:)
 
     if @new_message.save
       respond_to do |format|
@@ -21,7 +21,7 @@ class MessagesController < ApplicationController
 
   private
 
-  def messsage_params
+  def message_params
     params.require(:message).permit(:body)
   end
 end

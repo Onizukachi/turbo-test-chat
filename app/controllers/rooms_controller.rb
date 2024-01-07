@@ -7,11 +7,14 @@ class RoomsController < ApplicationController
   end
 
   def create
-    @new_room  = Room.create name: params[:room][:name]
+    @new_room = Room.new room_params
 
     if @new_room.save
-      flash[:notice] = 'Room was successfully created!'
-      redirect_to rooms_path
+      respond_to do |format|
+        flash.now[:notice] = 'Room was successfully created!'
+        format.turbo_stream
+        format.html { redirect_to rooms_path }
+      end
     else
       flash[:alert] = 'Room was not successfully created!'
       redirect_to rooms_path
@@ -21,5 +24,11 @@ class RoomsController < ApplicationController
   def show
     @single_room = Room.find params[:id]
     prepare_chat_env
+  end
+
+  private
+
+  def room_params
+    params.require(:room).permit(:name)
   end
 end

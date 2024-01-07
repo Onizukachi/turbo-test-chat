@@ -9,3 +9,6 @@ application.register("chat-refresh", ChatRefreshController)
 
 import HelloController from "./hello_controller"
 application.register("hello", HelloController)
+
+import InputResetController from "./input_reset_controller"
+application.register("input-reset", InputResetController)

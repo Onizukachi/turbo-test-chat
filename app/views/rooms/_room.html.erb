@@ -11,7 +11,7 @@
     <% end %>
   </div>
 
-  <%= form_with model: [@single_room, @message], data: { controller: 'chat-refresh', action: "turbo:submit-end->chat-refresh#clearInput" }, class: 'flex items-center border-t p-2' do |f| %>
+  <%= form_with model: [@single_room, @message], data: { controller: 'chat-refresh', action: "turbo:submit-end->chat-refresh#clearInput", 'chat-refresh-room-value': room.name }, class: 'flex items-center border-t p-2' do |f| %>
     <%= f.text_field :body, required: true, placeholder: 'Aa', class: 'w-full rounded-full border border-gray-200' %>
     <%= f.button  class: 'inline-flex hover:bg-indigo-50 rounded-full p-2' do %>
       <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">

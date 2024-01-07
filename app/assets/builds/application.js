@@ -32,10 +32,10 @@
     mod
   ));
 
-  // node_modules/@rails/actioncable/src/adapters.js
+  // node_modules/@hotwired/turbo-rails/node_modules/@rails/actioncable/src/adapters.js
   var adapters_default;
   var init_adapters = __esm({
-    "node_modules/@rails/actioncable/src/adapters.js"() {
+    "node_modules/@hotwired/turbo-rails/node_modules/@rails/actioncable/src/adapters.js"() {
       adapters_default = {
         logger: self.console,
         WebSocket: self.WebSocket
@@ -43,10 +43,10 @@
     }
   });
 
-  // node_modules/@rails/actioncable/src/logger.js
+  // node_modules/@hotwired/turbo-rails/node_modules/@rails/actioncable/src/logger.js
   var logger_default;
   var init_logger = __esm({
-    "node_modules/@rails/actioncable/src/logger.js"() {
+    "node_modules/@hotwired/turbo-rails/node_modules/@rails/actioncable/src/logger.js"() {
       init_adapters();
       logger_default = {
         log(...messages) {
@@ -59,10 +59,10 @@
     }
   });
 
-  // node_modules/@rails/actioncable/src/connection_monitor.js
+  // node_modules/@hotwired/turbo-rails/node_modules/@rails/actioncable/src/connection_monitor.js
   var now, secondsSince, ConnectionMonitor, connection_monitor_default;
   var init_connection_monitor = __esm({
-    "node_modules/@rails/actioncable/src/connection_monitor.js"() {
+    "node_modules/@hotwired/turbo-rails/node_modules/@rails/actioncable/src/connection_monitor.js"() {
       init_logger();
       now = () => (/* @__PURE__ */ new Date()).getTime();
       secondsSince = (time) => (now() - time) / 1e3;
@@ -170,10 +170,10 @@
     }
   });
 
-  // node_modules/@rails/actioncable/src/internal.js
+  // node_modules/@hotwired/turbo-rails/node_modules/@rails/actioncable/src/internal.js
   var internal_default;
   var init_internal = __esm({
-    "node_modules/@rails/actioncable/src/internal.js"() {
+    "node_modules/@hotwired/turbo-rails/node_modules/@rails/actioncable/src/internal.js"() {
       internal_default = {
         "message_types": {
           "welcome": "welcome",
@@ -197,10 +197,10 @@
     }
   });
 
-  // node_modules/@rails/actioncable/src/connection.js
+  // node_modules/@hotwired/turbo-rails/node_modules/@rails/actioncable/src/connection.js
   var message_types, protocols, supportedProtocols, indexOf, Connection, connection_default;
   var init_connection = __esm({
-    "node_modules/@rails/actioncable/src/connection.js"() {
+    "node_modules/@hotwired/turbo-rails/node_modules/@rails/actioncable/src/connection.js"() {
       init_adapters();
       init_connection_monitor();
       init_internal();
@@ -365,10 +365,10 @@
     }
   });
 
-  // node_modules/@rails/actioncable/src/subscription.js
+  // node_modules/@hotwired/turbo-rails/node_modules/@rails/actioncable/src/subscription.js
   var extend, Subscription;
   var init_subscription = __esm({
-    "node_modules/@rails/actioncable/src/subscription.js"() {
+    "node_modules/@hotwired/turbo-rails/node_modules/@rails/actioncable/src/subscription.js"() {
       extend = function(object, properties) {
         if (properties != null) {
           for (let key in properties) {
@@ -399,10 +399,10 @@
     }
   });
 
-  // node_modules/@rails/actioncable/src/subscription_guarantor.js
+  // node_modules/@hotwired/turbo-rails/node_modules/@rails/actioncable/src/subscription_guarantor.js
   var SubscriptionGuarantor, subscription_guarantor_default;
   var init_subscription_guarantor = __esm({
-    "node_modules/@rails/actioncable/src/subscription_guarantor.js"() {
+    "node_modules/@hotwired/turbo-rails/node_modules/@rails/actioncable/src/subscription_guarantor.js"() {
       init_logger();
       SubscriptionGuarantor = class {
         constructor(subscriptions) {
@@ -447,10 +447,10 @@
     }
   });
 
-  // node_modules/@rails/actioncable/src/subscriptions.js
+  // node_modules/@hotwired/turbo-rails/node_modules/@rails/actioncable/src/subscriptions.js
   var Subscriptions;
   var init_subscriptions = __esm({
-    "node_modules/@rails/actioncable/src/subscriptions.js"() {
+    "node_modules/@hotwired/turbo-rails/node_modules/@rails/actioncable/src/subscriptions.js"() {
       init_subscription();
       init_subscription_guarantor();
       init_logger();
@@ -528,7 +528,7 @@
     }
   });
 
-  // node_modules/@rails/actioncable/src/consumer.js
+  // node_modules/@hotwired/turbo-rails/node_modules/@rails/actioncable/src/consumer.js
   function createWebSocketURL(url) {
     if (typeof url === "function") {
       url = url();
@@ -545,7 +545,7 @@
   }
   var Consumer;
   var init_consumer = __esm({
-    "node_modules/@rails/actioncable/src/consumer.js"() {
+    "node_modules/@hotwired/turbo-rails/node_modules/@rails/actioncable/src/consumer.js"() {
       init_connection();
       init_subscriptions();
       Consumer = class {
@@ -579,7 +579,7 @@
     }
   });
 
-  // node_modules/@rails/actioncable/src/index.js
+  // node_modules/@hotwired/turbo-rails/node_modules/@rails/actioncable/src/index.js
   var src_exports = {};
   __export(src_exports, {
     Connection: () => connection_default,
@@ -605,7 +605,7 @@
     }
   }
   var init_src = __esm({
-    "node_modules/@rails/actioncable/src/index.js"() {
+    "node_modules/@hotwired/turbo-rails/node_modules/@rails/actioncable/src/index.js"() {
       init_connection();
       init_connection_monitor();
       init_consumer();
@@ -13037,16 +13037,14 @@
 
   // app/javascript/controllers/chat_refresh_controller.js
   var chat_refresh_controller_default = class extends Controller {
+    static values = { room: String };
     connect() {
       this.subscribe();
       this.scrollMessages();
     }
     subscribe() {
-      const turboCableStreamTag = document.querySelector("turbo-cable-stream-source");
-      const signedStreamName = turboCableStreamTag.channel.signed_stream_name;
-      const channelName = turboCableStreamTag.channel.channel;
       const scrollMessages = this.scrollMessages.bind(this);
-      this.subscription = consumer_default.subscriptions.create({ channel: channelName, signed_stream_name: signedStreamName }, {
+      this.subscription = consumer_default.subscriptions.create({ channel: "ChatChannel", room: this.roomValue }, {
         received(data) {
           setTimeout(scrollMessages, 100);
         }
@@ -13069,9 +13067,17 @@
     }
   };
 
+  // app/javascript/controllers/input_reset_controller.js
+  var input_reset_controller_default = class extends Controller {
+    clear() {
+      this.element.reset();
+    }
+  };
+
   // app/javascript/controllers/index.js
   application.register("chat-refresh", chat_refresh_controller_default);
   application.register("hello", hello_controller_default);
+  application.register("input-reset", input_reset_controller_default);
 
   // app/javascript/application.js
   var import_flowbite_turbo = __toESM(require_flowbite_turbo());
